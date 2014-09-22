@@ -73,6 +73,19 @@
       res.end();
     });
   });
+    
+  app.get('/api/charts', function(req, res) {
+    
+    res.contentType('application/json');
+    Chart.find({'visible':true}, {'_id':0, 'publicKey':1}, function(err, charts){
+     
+      if ( err )
+        return res.status(500).end(err);
+        
+      res.json(charts);
+    });
+    
+  });
   
   app.post('/api/chart', function(req, res) {
 
@@ -86,6 +99,7 @@
       res.status(200).end();
     });
   });
+
   
   // application -------------------------------------------------------------
 	app.get('*', function(req, res) {
