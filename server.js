@@ -7,7 +7,6 @@
 	var morgan = require('morgan'); 			            // log requests to the console (express4)
 	var bodyParser = require('body-parser'); 	        // pull information from HTML POST (express4)
 	var methodOverride = require('method-override');  // simulate DELETE and PUT (express4)
-
 	// configuration =================
 
   var connectUrl = 'mongodb://chartr:chartr@' + process.env.IP + ':27017/chartr';
@@ -33,20 +32,20 @@
       
       // User information
       email : String,
-      privateKey : { type: [String], index: true },
-      publicKey : { type: [String], index: true },
+      privateKey : { type: String, index: true },
+      publicKey : { type: String, index: true },
       
       // Information about the chart
       title : String,
       description : String,
       visible : Boolean,
-      tags : String,
+      tags : {type: [String], index: true},
       
       // Data Stream information
       streamType : String,
       streamUrl : String,
       xAxisField : String,
-      yAxisFields : String
+      yAxisFields : {type: [String] }
   });
   
   // Routes
@@ -77,12 +76,12 @@
   app.get('/api/charts', function(req, res) {
     
     res.contentType('application/json');
-    Chart.find({'visible':true}, {'_id':0, 'publicKey':1}, function(err, charts){
+    Chart.find({'visible':true}, {'_id':0, 'publicKey':1, 'title':1, 'description':1, 'tags':1}, function(err, charts){
      
       if ( err )
         return res.status(500).end(err);
         
-      res.json(charts);
+      res.status(200).json(charts).end();
     });
     
   });
