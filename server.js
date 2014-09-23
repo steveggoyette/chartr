@@ -9,8 +9,15 @@
 	var methodOverride = require('method-override');  // simulate DELETE and PUT (express4)
 
 	// configuration =================
-
-  var connectUrl = 'mongodb://chartr:chartr@' + process.env.IP + ':27017/chartr';
+  var IP = '127.0.0.1';
+  if ( process.env.IP ) {
+    IP = process.env.IP;
+  }
+  var PORT = 8000;
+  if ( process.env.PORT ) {
+    PORT = process.env.PORT;
+  }
+  var connectUrl = 'mongodb://chartr:chartr@' + IP + ':27017/chartr';
 	mongoose.connect(connectUrl); 	// connect to mongoDB database on modulus.io
 
   mongoose.connection.on('error', function(err) {
@@ -25,8 +32,8 @@
 	app.use(methodOverride());
 
 	// listen (start app with node server.js) ======================================
-	app.listen(process.env.PORT);
-	console.log("App listening on port " + process.env.PORT);
+	app.listen(PORT);
+	console.log("App listening on port " + PORT);
 
   // Define model
   var Chart = mongoose.model('Chart', {
