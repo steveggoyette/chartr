@@ -8,15 +8,15 @@
 	var bodyParser = require('body-parser'); 	        // pull information from HTML POST (express4)
 	var methodOverride = require('method-override');  // simulate DELETE and PUT (express4)
 	// configuration =================
-  var IP = '127.0.0.1';
-  if ( process.env.IP ) {
-    IP = process.env.IP;
+  
+  if ( !process.env.IP ) {
+    process.env.IP = '127.0.0.1';
+  }   
+  
+  if ( !process.env.PORT ) {
+    process.env.PORT = 8080;
   }
-  var PORT = 8000;
-  if ( process.env.PORT ) {
-    PORT = process.env.PORT;
-  }
-  var connectUrl = 'mongodb://chartr:chartr@' + IP + ':27017/chartr';
+  var connectUrl = 'mongodb://chartr:chartr@' + process.env.IP + ':27017/chartr';
 	mongoose.connect(connectUrl); 	// connect to mongoDB database on modulus.io
 
   mongoose.connection.on('error', function(err) {
@@ -33,8 +33,8 @@
 
 
 	// listen (start app with node server.js) ======================================
-	app.listen(PORT);
-	console.log("App listening on port " + PORT);
+	app.listen(process.env.PORT);
+	console.log("App listening on port " + process.env.PORT );
 
   // Define model
   var Chart = mongoose.model('Chart', {
