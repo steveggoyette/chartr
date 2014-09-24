@@ -2,8 +2,9 @@
 
 var chartr = angular.module('chartr', []);
 
-function mainController($scope, $http, $location) {
+function mainController($scope, $http) {
 	$scope.formData = {};
+	$scope.mode = 0;
 
 	// when landing on the page, get all charts and show them
 	$http.get('/api/charts')
@@ -28,18 +29,6 @@ function mainController($scope, $http, $location) {
 			});
 	};
 
-	// delete a todo after checking it
-	$scope.deleteChart = function(id) {
-		$http.delete('/api/chart/' + id)
-			.success(function(data) {
-				$scope.todos = data;
-				console.log(data);
-			})
-			.error(function(data) {
-				console.log('Error: ' + data);
-			});
-	};
-
 	$scope.chartsByTagname = function(tag) {
 		$http.get('/api/charts?tag='+tag).success(function(data) {
 			$scope.charts = data;
@@ -47,6 +36,24 @@ function mainController($scope, $http, $location) {
 		.error(function(data) {
 			console.log('Error: ' + data);
 		});
+	};
+
+	$scope.showMain = function() {
+		if ( $scope.mode === 0 ) {
+			console.log("Show Main");
+		} else {
+			console.log("Mode is : " + $scope.mode);
+		}
+		return ($scope.mode === 0);
+	};
+
+	$scope.showCharts = function() {
+		if ( $scope.mode === 1 ) {
+			console.log("Show Charts");
+		} else {
+			console.log("Mode is : " + $scope.mode);
+		}
+		return ($scope.mode === 1);
 	};
 
 }

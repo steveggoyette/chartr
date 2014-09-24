@@ -21,15 +21,30 @@
 
     
 </head>
-<!-- SET THE CONTROLLER AND GET ALL TODOS -->
+
 <body ng-controller="mainController">
-	<div class="container-fluid">
+	<div class='info-row'>
+		<h1>Chartr - Charting for the Internet of Things</h1>
+		<a ng-href='#' ng-click='mode=0'>Home</a> | 
+		<a ng-href='#' ng-click='mode=1'>Browse Public Charts</a> | 
+		<a ng-href='#' ng-click='mode=2'>Create Chart</a>
+		<hr size='1'/>
+	</div>
+	<div id='main' ng-show='mode==0' class='container-fluid'>
+
+		<div class='info-row'>
+			<h2>Making the visualization of your IoT data easier since the day before yesterday</h2>
+		</div>
+
+	</div>
+	<div id='browseCharts' ng-show='mode==1' class="container-fluid">
 
 		<div class='info-row'>
 			<div class='content'>
-				<h1>There are {{charts.length}} public charts</h1>
+				<h2>There are {{charts.length}} public charts</h2>
 			</div>
 		</div>
+
 		<div class ="chart-row" ng-repeat="chart in charts">
 			<div class='content'>
 				<span class='chart-title'>{{ chart.title }}</span><br/>
