@@ -1,0 +1,70 @@
+html { 
+	overflow-y:scroll; 
+}
+body { 
+	font-family: "Source Sans Pro",Helvetica,Arial,sans-serif;
+	font-size: 16px;
+	line-height: 1.42857143;
+	color: #222;
+	background-color: #fff;
+	margin: 0;
+}
+h1 {
+	font-size: 32px;
+}
+.container-fluid {
+	margin-right: auto;
+	margin-left: auto;
+	padding-left: 50px;
+	padding-right: 50px;
+}
+.content {
+}
+.chart-title { 
+	color:#84011; 
+	font-size: 16px; 
+}
+.chart-description { 
+	font-size: 12px; 
+	font-style: italic; 
+}
+
+.chart-row {
+	border-bottom: 1px solid #eee;
+	padding-bottom: 1em;
+	padding-top: 1em;
+	display: block;
+}
+.info-row {
+	padding-bottom: 1em;
+	padding-top: 1em;
+	display: block;
+}
+a.tag {
+	text-decoration: none;
+}
+a.tag span { 
+    display: inline; 
+	padding: .2em .6em .3em; 
+	font-size: 75%; 
+	font-weight: 700; 
+	line-height: 1; 
+	color: #fff; 
+	text-align: center; 
+	white-space: nowrap; 
+	vertical-align: baseline; 
+	border-radius: .25em; 
+	background-color: #3c464d; 
+	background: #fff; 
+	color: #555; 
+	font-weight: 400; 
+	border: 2px solid #eee;
+}
+a.tag span:hover {
+	background: #d0021b;
+	color: #fff;
+	border: 2px solid #963c32;
+}
+.chart-tags {
+	display: inline;
+}

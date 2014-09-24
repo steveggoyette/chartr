@@ -1,5 +1,5 @@
 <!-- index.html -->
-<!doctype html>
+<!DOCTYPE html>
 
 <!-- ASSIGN OUR ANGULAR MODULE -->
 <html ng-app="chartr">
@@ -11,61 +11,34 @@
 	<title>Chartr</title>
 
 	<!-- SCROLLS -->
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
-	<style>
-		html 			{ overflow-y:scroll; }
-		body 			{ padding-top:50px; }
-		span                    { display: inline; }
-	        .chart-title            { color:#84011; font-size: 16px; }
-        	.chart-description      { font-size: 12px; font-style: italic; }
-        	.charts                 { display: block; border-bottom-width: 1px; border-bottom-color: #EEE; border-bottom-style: solid; padding-bottom: 16px; padding-top: 16px; } 
-        	a.tag span 		{ 
-	        				display: inline; 
-	        				padding: .2em .6em .3em; 
-	        				font-size: 75%; 
-	        				font-weight: 700; 
-	        				line-height: 1; 
-	        				color: #fff; 
-	        				text-align: center; 
-	        				white-space: nowrap; 
-	        				vertical-align: baseline; 
-	        				border-radius: .25em; 
-	        				background-color: #3c464d; 
-	        				background: #fff; 
-	        				color: #555; 
-	        				font-weight: 400; 
-	        				border: 2px solid #eee;
-					}
-	</style>
+	<link rel="stylesheet" href="css/bootstrap.min.css"><!-- load bootstrap -->
+	<link rel="stylesheet" href="css/site.css">
 
 	<!-- SPELLS -->
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
-	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><!-- load angular -->
+	<script src="javascript/jquery.min.js"></script><!-- load jquery -->
+	<script src="javascript/angular.min.js"></script><!-- load angular -->
 	<script src="core.js"></script>
 
     
 </head>
 <!-- SET THE CONTROLLER AND GET ALL TODOS -->
 <body ng-controller="mainController">
-	<div class="container">
+	<div class="container-fluid">
 
-		<!-- HEADER AND TODO COUNT -->
-		<div class="jumbotron text-center">
-			<h1>Public Charts <span class="label label-info">{{ charts.length }}</span></h1>
+		<div class='info-row'>
+			<div class='content'>
+				<h1>There are {{charts.length}} public charts</h1>
+			</div>
 		</div>
-
-		<!-- TODO LIST -->
-		<div id="chart-list" class="row">
-			<div>
-				<div class ="row charts" ng-repeat="chart in charts">
-	    				<span class='chart-title'>{{ chart.title }}</span><br/>
-	    				<span class='chart-description'>{{ chart.description }}</span><br/>
-	    				<div class ="row tags" ng-repeat="tag in chart.tags">
-	    					<a class='tag' href='#'><span class='tag-title'>{{ tag }}</span></a>
-	    				</div>
+		<div class ="chart-row" ng-repeat="chart in charts">
+			<div class='content'>
+				<span class='chart-title'>{{ chart.title }}</span><br/>
+				<span class='chart-description'>{{ chart.description }}</span><br/>
+				<div class ="chart-tags" ng-repeat="tag in chart.tags">
+					<a class='tag' ng-href='#' ng-click='chartsByTagname(tag)'><span class='tag-title'>{{ tag }}</span></a>
 				</div>
 			</div>
 		</div>
-	</div>
+	</main>
 </body>
 </html>

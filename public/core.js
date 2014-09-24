@@ -2,10 +2,10 @@
 
 var chartr = angular.module('chartr', []);
 
-function mainController($scope, $http) {
+function mainController($scope, $http, $location) {
 	$scope.formData = {};
 
-	// when landing on the page, get all todos and show them
+	// when landing on the page, get all charts and show them
 	$http.get('/api/charts')
 		.success(function(data) {
 			$scope.charts = data;
@@ -38,6 +38,15 @@ function mainController($scope, $http) {
 			.error(function(data) {
 				console.log('Error: ' + data);
 			});
+	};
+
+	$scope.chartsByTagname = function(tag) {
+		$http.get('/api/charts?tag='+tag).success(function(data) {
+			$scope.charts = data;
+		})
+		.error(function(data) {
+			console.log('Error: ' + data);
+		});
 	};
 
 }

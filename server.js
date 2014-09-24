@@ -30,6 +30,8 @@
 	app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
 	app.use(methodOverride());
 
+
+
 	// listen (start app with node server.js) ======================================
 	app.listen(PORT);
 	console.log("App listening on port " + PORT);
@@ -79,11 +81,18 @@
       res.end();
     });
   });
-    
+
   app.get('/api/charts', function(req, res) {
     
     res.contentType('application/json');
-    Chart.find({'visible':true}, {'_id':0, 'publicKey':1, 'title':1, 'description':1, 'tags':1}, function(err, charts){
+
+    var query = {'visible':true};
+    if ( req.query.tag ) {
+      query.tags = req.query.tag;
+    }
+    console.log(req.query.tag);
+
+    Chart.find(query, {'_id':0, 'publicKey':1, 'title':1, 'description':1, 'tags':1}, function(err, charts){
      
       if ( err )
         return res.status(500).end(err);
@@ -92,7 +101,7 @@
     });
     
   });
-  
+
   app.post('/api/chart', function(req, res) {
 
     res.contentType('application/json');
@@ -111,3 +120,4 @@
 	app.get('*', function(req, res) {
 		res.sendfile('./public/index.html'); // load the single view file (angular will handle the page changes on the front-end)
 	});
+
